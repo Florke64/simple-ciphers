@@ -6,7 +6,6 @@ import pl.florke.simpleciphers.exceptions.*;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Main {
@@ -66,7 +65,6 @@ public class Main {
         System.out.println("Example: java -jar SimpleCiphers.jar vigenere decrypt input.txt output.txt key");
         System.out.println("Available ciphers: cesar, vigenere | Available modes: encrypt, decrypt");
 
-        final StringBuilder sb = new StringBuilder();
         final List<String> files = new ArrayList<>();
 
         // Read working directory content
@@ -81,11 +79,11 @@ public class Main {
         System.out.print("Text files in workdir(" + workDir + "): ");
         for (String file : files) {
             if (file.endsWith(".txt")) {
-                System.out.print(", " + file);
+                System.out.print(file + " ");
             }
         }
 
-        if (sb.isEmpty()) {
+        if (files.isEmpty()) {
             System.out.print("(empty)");
         }
 
