@@ -3,7 +3,6 @@ package pl.florke.simpleciphers.io;
 import pl.florke.simpleciphers.exceptions.FileException;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
