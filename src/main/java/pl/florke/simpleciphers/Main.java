@@ -43,6 +43,8 @@ public class Main {
         } catch (FileException | CipherException | IllegalArgumentException e) {
             System.err.println("Blad: " + e.getMessage());
         }
+
+        ui.readString("Nacisnij ENTER aby zakonczyc", null);
     }
 
     private static Cipher createCipher(String cipherType, String keyOrShift) throws CipherException {

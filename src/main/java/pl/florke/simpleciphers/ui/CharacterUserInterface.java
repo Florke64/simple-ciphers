@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CharacterUserInterface {
 
     public CharacterUserInterface() {
-        System.out.println("Author: Daniel Chojnacki");
+        System.out.println("Autor: Daniel Chojnacki");
         System.out.println("122554@student.san.edu.pl");
         System.out.println();
     }
@@ -42,6 +42,7 @@ public class CharacterUserInterface {
             }
 
         } while (selection == null || !selection.matches("[0-6]"));
+        System.out.println();
 
         printTextFilesList(System.getProperty("user.dir"));
         String inputFile = readString("Podaj nazwe pliku wejsciowego", "input.txt");
@@ -51,7 +52,7 @@ public class CharacterUserInterface {
         return new String[] {cipherType, mode, inputFile, outputFile, keyOrShift};
     }
 
-    public String readString(final String prompt, final String def) {
+    public static String readString(final String prompt, final String def) {
         System.out.print(prompt);
         if (def != null) System.out.print(" [" + def + "]");
         System.out.print(": ");
@@ -67,7 +68,7 @@ public class CharacterUserInterface {
         return def;
     }
 
-    private void printMenuOptions() {
+    private static void printMenuOptions() {
         System.out.println("Szyfrowanie Cezar & Vigenere");
         System.out.println(" --- --- --- --- --- --- ---");
         System.out.println("1. Szyfr Cezara");
@@ -104,14 +105,13 @@ public class CharacterUserInterface {
         }
 
         System.out.print("Pliki *.txt w tym folderze [" + workDir + "]: ");
+        if (files.isEmpty()) System.out.print("(brak)");
+        else System.out.print("\n > ");
+
         for (String file : files) {
             if (file.endsWith(".txt")) {
                 System.out.print(file + " ");
             }
-        }
-
-        if (files.isEmpty()) {
-            System.out.print("(brak)");
         }
 
         System.out.println();
