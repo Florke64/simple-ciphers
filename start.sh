@@ -1,4 +1,4 @@
 #!/bin/bash
 
-java -jar out/artifacts/SimpleCiphers/impleCiphers.jar caesar encrypt input.txt output.txt 3
+java -jar out/artifacts/SimpleCiphers/SimpleCiphers.jar caesar encrypt input.txt output.txt 3
 
