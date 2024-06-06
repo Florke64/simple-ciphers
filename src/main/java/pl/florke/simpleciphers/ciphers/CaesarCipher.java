@@ -10,12 +10,22 @@ public class CaesarCipher implements Cipher {
     @Override
     public String encrypt(String plaintext) {
         // Implementation of Caesar encryption
-        return "";
+        final char[] chars = plaintext.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            chars[i] = (char) (chars[i] + shift);
+        }
+
+        return new String(chars);
     }
 
     @Override
     public String decrypt(String ciphertext) {
         // Implementation of Caesar decryption
-        return "";
+        final char[] chars = ciphertext.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            chars[i] = (char) (chars[i] - shift);
+        }
+
+        return new String(chars);
     }
 }
