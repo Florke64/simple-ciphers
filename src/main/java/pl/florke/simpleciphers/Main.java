@@ -3,15 +3,18 @@ package pl.florke.simpleciphers;
 import pl.florke.simpleciphers.ciphers.*;
 import pl.florke.simpleciphers.io.*;
 import pl.florke.simpleciphers.exceptions.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
+import pl.florke.simpleciphers.ui.CharacterUserInterface;
 
 public class Main {
     public static void main(String[] args) {
+        final CharacterUserInterface ui = new CharacterUserInterface();
+
+        if(args.length == 0) {
+            args = ui.mainMenu();
+        }
+
         if (args.length < 4) {
-            showHelp();
+            CharacterUserInterface.printUsageHelp();
             return;
         }
 
@@ -31,14 +34,14 @@ public class Main {
             } else if ("decrypt".equalsIgnoreCase(mode)) {
                 output = cipher.decrypt(input);
             } else {
-                throw new IllegalArgumentException("Invalid mode. Use 'encrypt' or 'decrypt'.");
+                throw new IllegalArgumentException("Niewspierany tryb. Użyj encrypt lub decrypt");
             }
 
             FileWriter.write(outputFile, output);
-            System.out.println("Operation completed successfully.");
+            System.out.println("Operacja zakonczona pomyslnie");
 
         } catch (FileException | CipherException | IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Blad: " + e.getMessage());
         }
     }
 
@@ -46,47 +49,16 @@ public class Main {
         switch (cipherType.toLowerCase()) {
             case "caesar":
                 if (keyOrShift == null || !keyOrShift.matches("\\d+")) {
-                    throw new IllegalArgumentException("Caesar cipher requires a numerical shift.");
+                    throw new IllegalArgumentException("Szyfr Cezara wymaga przesuniecia liczbowego");
                 }
                 return new CaesarCipher(Integer.parseInt(keyOrShift));
             case "vigenere":
                 if (keyOrShift == null) {
-                    throw new IllegalArgumentException("Vigenere cipher requires a key.");
+                    throw new IllegalArgumentException("Szfr Vigenere wymaga klucza");
                 }
                 return new VigenereCipher(keyOrShift);
             default:
-                throw new CipherException("Unsupported cipher type: " + cipherType);
+                throw new CipherException("Niewspierany typ szyfrowania: " + cipherType + ". Uzyj caesar lub vigenere");
         }
-    }
-
-    private static void showHelp() {
-        System.out.println("Usage: java -jar SimpleCiphers.jar <cipher> <mode> <inputFile> <outputFile> [key/shift]");
-        System.out.println("Example: java -jar SimpleCiphers.jar caesar encrypt input.txt output.txt 3");
-        System.out.println("Example: java -jar SimpleCiphers.jar vigenere decrypt input.txt output.txt key");
-        System.out.println("Available ciphers: cesar, vigenere | Available modes: encrypt, decrypt");
-
-        final List<String> files = new ArrayList<>();
-
-        // Read working directory content
-        try {
-            final String workDir = System.getProperty("user.dir");
-            files.addAll(FileReader.directoryContentsList(workDir));
-        } catch (FileException e) {
-            throw new RuntimeException(e);
-        }
-
-        final String workDir = System.getProperty("user.dir");
-        System.out.print("Text files in workdir(" + workDir + "): ");
-        for (String file : files) {
-            if (file.endsWith(".txt")) {
-                System.out.print(file + " ");
-            }
-        }
-
-        if (files.isEmpty()) {
-            System.out.print("(empty)");
-        }
-
-        System.out.println();
     }
 }
