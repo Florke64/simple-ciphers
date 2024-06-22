@@ -59,7 +59,7 @@ public class Main {
                 if (keyOrShift == null || !keyOrShift.matches("\\d+")) {
                     throw new IllegalArgumentException("Szyfr Cezara wymaga przesuniecia liczbowego");
                 }
-                return new CaesarCipher(Integer.parseInt(keyOrShift));
+                return new CaesarCipher(Integer.parseInt(keyOrShift.strip()));
             case "vigenere":
                 if (keyOrShift == null) {
                     throw new IllegalArgumentException("Szfr Vigenere wymaga klucza");

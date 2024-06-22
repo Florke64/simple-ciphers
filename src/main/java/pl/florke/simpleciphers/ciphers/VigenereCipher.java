@@ -1,5 +1,9 @@
 package pl.florke.simpleciphers.ciphers;
 
+import pl.florke.simpleciphers.util.AlphabetUtil;
+
+import static pl.florke.simpleciphers.util.AlphabetUtil.getIndexByCharacter;
+
 public class VigenereCipher implements Cipher {
     private char[] key;
 
@@ -14,7 +18,7 @@ public class VigenereCipher implements Cipher {
 
         int loopIndex = 0;
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char) (chars[i] + key[loopIndex]);
+            chars[i] = AlphabetUtil.getCharacterShiftedByIndex(chars[i], key[loopIndex]);
             loopIndex++;
             if (loopIndex >= key.length) {
                 loopIndex = 0;
@@ -31,7 +35,7 @@ public class VigenereCipher implements Cipher {
 
         int loopIndex = 0;
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char) (chars[i] - key[loopIndex]);
+            chars[i] = AlphabetUtil.getCharacterShiftedByIndex(chars[i], -key[loopIndex]);
             loopIndex++;
             if (loopIndex >= key.length) {
                 loopIndex = 0;
