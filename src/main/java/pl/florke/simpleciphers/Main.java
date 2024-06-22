@@ -1,8 +1,12 @@
 package pl.florke.simpleciphers;
 
-import pl.florke.simpleciphers.ciphers.*;
-import pl.florke.simpleciphers.io.*;
-import pl.florke.simpleciphers.exceptions.*;
+import pl.florke.simpleciphers.ciphers.CaesarCipher;
+import pl.florke.simpleciphers.ciphers.Cipher;
+import pl.florke.simpleciphers.ciphers.VigenereCipher;
+import pl.florke.simpleciphers.exceptions.CipherException;
+import pl.florke.simpleciphers.exceptions.FileException;
+import pl.florke.simpleciphers.io.FileReader;
+import pl.florke.simpleciphers.io.FileWriter;
 import pl.florke.simpleciphers.ui.CharacterUserInterface;
 
 public class Main {

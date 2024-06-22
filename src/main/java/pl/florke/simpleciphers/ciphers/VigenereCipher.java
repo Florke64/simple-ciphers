@@ -2,8 +2,6 @@ package pl.florke.simpleciphers.ciphers;
 
 import pl.florke.simpleciphers.util.AlphabetUtil;
 
-import static pl.florke.simpleciphers.util.AlphabetUtil.getIndexByCharacter;
-
 public class VigenereCipher implements Cipher {
     private char[] key;
 
