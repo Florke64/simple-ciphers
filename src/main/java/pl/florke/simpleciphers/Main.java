@@ -22,7 +22,13 @@ public class Main {
         String mode = args[1];
         String inputFile = args[2];
         String outputFile = args[3];
-        String keyOrShift = args.length == 5 ? args[4] : null;
+
+        String keyOrShift = null;
+        try {
+            keyOrShift = args.length == 5 ? FileReader.read(args[4]) : null;
+        } catch (FileException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             Cipher cipher = createCipher(cipherType, keyOrShift);

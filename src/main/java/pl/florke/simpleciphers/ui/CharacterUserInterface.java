@@ -1,6 +1,5 @@
 package pl.florke.simpleciphers.ui;
 
-import pl.florke.simpleciphers.crackers.Cracker;
 import pl.florke.simpleciphers.exceptions.FileException;
 import pl.florke.simpleciphers.io.FileReader;
 
@@ -34,9 +33,6 @@ public class CharacterUserInterface {
                 cipherType = "vigenere";
                 mode = selection.equals("3") ? "encrypt" : "decrypt";
             }
-            else if ("5".equals(selection)) {
-                final Cracker cracker;
-            }
             else if ("0".equals(selection)) {
                 return new String[]{};
             }
@@ -47,8 +43,7 @@ public class CharacterUserInterface {
         printTextFilesList(System.getProperty("user.dir"));
         String inputFile = readString("Podaj nazwe pliku wejsciowego", "input.txt");
         String outputFile = readString("Podaj nazwe pliku wyjsciowego", "output.txt");
-        String keyOrShift = readString("Podaj " + (cipherType.equals("caesar") ? "przesuniecie" : "klucz"), null);
-
+        String keyOrShift = readString("Podaj nazwe pliku klucza", "key.txt");
         return new String[] {cipherType, mode, inputFile, outputFile, keyOrShift};
     }
 
@@ -75,15 +70,13 @@ public class CharacterUserInterface {
         System.out.println("2. Deszyfracja Szyfru Cezara");
         System.out.println("3. Szyfr Vigenere");
         System.out.println("4. Deszyfracja Szyfru Vigenere");
-        System.out.println("5. Łamanie szyfru Vigenere");
-//        System.out.println("6. Łamanie szyfru Cezara");
 
         System.out.println("0. Wyjdz");
         System.out.println();
     }
 
     public static void printUsageHelp() {
-        System.out.println("Uzyj: java -jar SimpleCiphers.jar <cipher> <mode> <inputFile> <outputFile> [key/shift]");
+        System.out.println("Uzyj: java -jar SimpleCiphers.jar <cipher> <mode> <inputFile> <outputFile> [keyFile/shiftFile]");
         System.out.println("Brak argumentow uruchomi program w trybie interaktywnym.");
         System.out.println();
         System.out.println("Przyklad: java -jar SimpleCiphers.jar caesar encrypt input.txt output.txt 3");
